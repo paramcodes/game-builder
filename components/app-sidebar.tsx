@@ -1,12 +1,19 @@
 "use client"
 
 import Image from "next/image"
-import { Coins, SquarePen } from "lucide-react"
+import { Coins, MessageSquare, SquarePen } from "lucide-react"
 
 import {
   Empty,
   EmptyDescription,
 } from "@/components/ui/empty"
+import {
+  Popover,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import {
   Sidebar,
   SidebarContent,
@@ -22,11 +29,19 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
+function GamesEmpty() {
+  return (
+    <Empty className="border p-4">
+      <EmptyDescription>Your games will live here.</EmptyDescription>
+    </Empty>
+  )
+}
+
 export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
           <Image
             src="/logo.svg"
             alt="Sandbox logo"
@@ -37,7 +52,7 @@ export function AppSidebar() {
           <span className="truncate text-lg font-semibold group-data-[collapsible=icon]:hidden">
             Sandbox
           </span>
-          <SidebarTrigger className="ml-auto" />
+          <SidebarTrigger className="ml-auto group-data-[collapsible=icon]:hidden" />
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -45,33 +60,73 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton tooltip="New game" size="lg">
+                <SidebarMenuButton
+                  tooltip="New game"
+                  size="lg"
+                  className="bg-sidebar-accent text-sidebar-accent-foreground"
+                >
                   <SquarePen />
-                  <span>New game</span>
+                  <span className="group-data-[collapsible=icon]:sr-only">
+                    New game
+                  </span>
                 </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem className="hidden group-data-[collapsible=icon]:block">
+                <Popover>
+                  <PopoverTrigger
+                    render={<SidebarMenuButton size="lg" />}
+                    data-slot="sidebar-menu-button"
+                  >
+                    <MessageSquare />
+                    <span className="group-data-[collapsible=icon]:sr-only">
+                      Games
+                    </span>
+                  </PopoverTrigger>
+                  <PopoverContent side="right" align="center" sideOffset={8}>
+                    <PopoverHeader>
+                      <PopoverTitle>Games</PopoverTitle>
+                    </PopoverHeader>
+                    <GamesEmpty />
+                  </PopoverContent>
+                </Popover>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup>
+        <SidebarGroup className="group-data-[collapsible=icon]:hidden">
           <SidebarGroupLabel>Recents</SidebarGroupLabel>
           <SidebarGroupContent>
-            <Empty className="border p-4">
-              <EmptyDescription>Your games will live here.</EmptyDescription>
-            </Empty>
+            <GamesEmpty />
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <div className="flex items-center gap-2 px-2 py-1.5 text-sm">
+        <div className="flex items-center gap-2 px-2 py-1.5 text-sm group-data-[collapsible=icon]:hidden">
           <Coins className="size-4 shrink-0" />
-          <span className="text-muted-foreground group-data-[collapsible=icon]:hidden">
-            Credits
-          </span>
-          <span className="ml-auto tabular-nums group-data-[collapsible=icon]:hidden">
-            $1.00
-          </span>
+          <span className="text-muted-foreground">Credits</span>
+          <span className="ml-auto tabular-nums">$1.00</span>
         </div>
+        <SidebarMenu className="hidden group-data-[collapsible=icon]:flex">
+          <SidebarMenuItem>
+            <Popover>
+              <PopoverTrigger
+                render={<SidebarMenuButton size="lg" />}
+                data-slot="sidebar-menu-button"
+              >
+                <Coins />
+                <span className="group-data-[collapsible=icon]:sr-only">
+                  Credits
+                </span>
+              </PopoverTrigger>
+              <PopoverContent side="right" align="end" sideOffset={8}>
+                <PopoverHeader>
+                  <PopoverTitle>Credits</PopoverTitle>
+                </PopoverHeader>
+                <p className="text-sm tabular-nums">$1.00</p>
+              </PopoverContent>
+            </Popover>
+          </SidebarMenuItem>
+        </SidebarMenu>
         {/* TODO: org switcher + UserButton */}
         <div className="flex items-center gap-2 px-2 py-1.5" />
       </SidebarFooter>
