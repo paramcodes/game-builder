@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { Coins, MessageSquare, SquarePen } from "lucide-react"
-import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
+import { OrganizationSwitcher, Show, UserButton } from "@clerk/nextjs"
 
 import {
   Empty,
@@ -138,15 +138,11 @@ export function AppSidebar() {
             </Popover>
           </SidebarMenuItem>
         </SidebarMenu>
-        {/* TODO: org switcher + UserButton */}
-        <Show when="signed-out">
-          <div className="flex flex-col gap-2 px-2 py-1.5 group-data-[collapsible=icon]:hidden">
-            <SignInButton mode="modal" />
-            <SignUpButton mode="modal" />
-          </div>
-        </Show>
         <Show when="signed-in">
-          <div className="flex items-center gap-2 px-2 py-1.5 group-data-[collapsible=icon]:justify-center">
+          <div className="px-2 py-1.5 group-data-[collapsible=icon]:hidden">
+            <OrganizationSwitcher hidePersonal />
+          </div>
+          <div className="flex items-center gap-2 px-2 py-1.5 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
             <UserButton />
             <span className="text-muted-foreground text-sm group-data-[collapsible=icon]:hidden">
               Account

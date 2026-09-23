@@ -13,3 +13,5 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Dump learnings in `specs/` as numbered files (`00-filename.md`, `01-filename.md`, …). One concept per file.
 - Auth is Clerk (accountless dev): set up with `bunx -y clerk@latest init`, verify with `bunx -y clerk@latest doctor`. Never read `.env*` files. Claim the app with `clerk auth login` only when asked.
 - Next 16 auth middleware lives in `proxy.ts` (not `middleware.ts`); `ClerkProvider` goes inside `<body>`; Clerk uses the shadcn theme from `@clerk/ui/themes`.
+- Routes: auth pages in `app/(auth)/` (own layout, URLs unchanged), app shell in `app/(dashboard)/layout.tsx`. Proxy is protected-first: only `/sign-in`, `/sign-up` public via `isPublicRoute`, rest `auth.protect()`.
+- Orgs are Membership-required (forced selection, no personal accounts, invite-only joins). After moving routes, `rm -rf .next` before rebuild (stale type validators).
