@@ -40,3 +40,4 @@ next-env.d.ts
 # agent tooling
 .hermes/
 .pi/
+.neon
