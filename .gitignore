@@ -36,3 +36,7 @@ bun-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agent tooling
+.hermes/
+.pi/
