@@ -4,10 +4,7 @@ import Image from "next/image"
 import { Coins, MessageSquare, SquarePen } from "lucide-react"
 import { OrganizationSwitcher, Show, UserButton } from "@clerk/nextjs"
 
-import {
-  Empty,
-  EmptyDescription,
-} from "@/components/ui/empty"
+import { Empty, EmptyDescription } from "@/components/ui/empty"
 import {
   Popover,
   PopoverContent,
@@ -139,17 +136,13 @@ export function AppSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
         <Show when="signed-in">
-          <div className="px-2 py-1.5 group-data-[collapsible=icon]:hidden">
-            <OrganizationSwitcher hidePersonal />
-          </div>
           <div className="flex items-center gap-2 px-2 py-1.5 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0">
+            <div className="min-w-0 flex-1 group-data-[collapsible=icon]:hidden">
+              <OrganizationSwitcher hidePersonal />
+            </div>
             <UserButton />
-            <span className="text-muted-foreground text-sm group-data-[collapsible=icon]:hidden">
-              Account
-            </span>
           </div>
         </Show>
-        <div className="flex items-center gap-2 px-2 py-1.5" />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
