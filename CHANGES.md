@@ -3,6 +3,7 @@
 Log of user-facing changes per iteration.
 
 ## Unreleased
+- Dashboard home is now a centered empty-state hero: Sandbox logo (`/logo.svg`, 72px), XL headline "What should we build today?", and muted subtext "Build your own racers, shooters, puzzles and whole worlds using your own words. If you can describe it, you can play it." Theme-aware, no forced background.
 - Drizzle ORM scaffold (empty, fresh schema): `drizzle-orm` + `@neondatabase/serverless` (`neon-http` driver) + `drizzle-kit` + `tsx`; `drizzle.config.ts`, `lib/db/schema.ts`, `lib/db/index.ts`; `db:generate/migrate/push/studio/check` scripts. App uses pooled `DATABASE_URL`, migrations prefer direct `DATABASE_URL_UNPOOLED`.
 - Pinned `turbopack.root` to the project dir in `next.config.ts` so `bun run dev` no longer warns about the stray `/home/param/Documents/package-lock.json` outside the repo.
 - Added Clerk auth: `proxy.ts` middleware, `ClerkProvider` with shadcn theme in `app/layout.tsx`, `/sign-in` and `/sign-up` routes, sidebar footer auth controls, `@clerk/nextjs` + `@clerk/ui`; lockfile switched to `bun.lock`.
