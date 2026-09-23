@@ -3,6 +3,7 @@
 Log of user-facing changes per iteration.
 
 ## Unreleased
+- Pinned `turbopack.root` to the project dir in `next.config.ts` so `bun run dev` no longer warns about the stray `/home/param/Documents/package-lock.json` outside the repo.
 - Added Clerk auth: `proxy.ts` middleware, `ClerkProvider` with shadcn theme in `app/layout.tsx`, `/sign-in` and `/sign-up` routes, sidebar footer auth controls, `@clerk/nextjs` + `@clerk/ui`; lockfile switched to `bun.lock`.
 - Auth: email (`email_code`) + Google OAuth sign-up/sign-in confirmed on (Clerk shared dev OAuth keys); Organizations enabled with forced selection — every user must create or join an org, personal accounts off, verified-domains auto-join off (existing orgs are invite-only).
 - Routes regrouped without URL changes: auth pages under `app/(auth)/` with their own centered layout; sidebar shell moved to `app/(dashboard)/layout.tsx`; `app/(dashboard)/page.tsx` dashboard home; root `app/layout.tsx` stays slim (fonts + CSS + providers).
