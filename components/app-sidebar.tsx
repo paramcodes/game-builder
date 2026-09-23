@@ -47,12 +47,12 @@ export function AppSidebar() {
             alt="Sandbox logo"
             width={24}
             height={24}
-            className="size-6 shrink-0"
+            className="size-6 shrink-0 group-data-[collapsible=icon]:hidden"
           />
           <span className="truncate text-lg font-semibold group-data-[collapsible=icon]:hidden">
             Sandbox
           </span>
-          <SidebarTrigger className="ml-auto group-data-[collapsible=icon]:hidden" />
+          <SidebarTrigger className="ml-auto group-data-[collapsible=icon]:ml-0" />
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -63,7 +63,7 @@ export function AppSidebar() {
                 <SidebarMenuButton
                   tooltip="New game"
                   size="lg"
-                  className="bg-sidebar-accent text-sidebar-accent-foreground"
+                  className="bg-sidebar-accent text-sidebar-accent-foreground group-data-[collapsible=icon]:justify-center"
                 >
                   <SquarePen />
                   <span className="group-data-[collapsible=icon]:sr-only">
@@ -74,7 +74,12 @@ export function AppSidebar() {
               <SidebarMenuItem className="hidden group-data-[collapsible=icon]:block">
                 <Popover>
                   <PopoverTrigger
-                    render={<SidebarMenuButton size="lg" />}
+                    render={
+                      <SidebarMenuButton
+                        size="lg"
+                        className="group-data-[collapsible=icon]:justify-center"
+                      />
+                    }
                     data-slot="sidebar-menu-button"
                   >
                     <MessageSquare />
@@ -110,7 +115,12 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <Popover>
               <PopoverTrigger
-                render={<SidebarMenuButton size="lg" />}
+                render={
+                  <SidebarMenuButton
+                    size="lg"
+                    className="group-data-[collapsible=icon]:justify-center"
+                  />
+                }
                 data-slot="sidebar-menu-button"
               >
                 <Coins />
