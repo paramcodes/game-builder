@@ -15,3 +15,4 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Next 16 auth middleware lives in `proxy.ts` (not `middleware.ts`); `ClerkProvider` goes inside `<body>`; Clerk uses the shadcn theme from `@clerk/ui/themes`.
 - Routes: auth pages in `app/(auth)/` (own layout, URLs unchanged), app shell in `app/(dashboard)/layout.tsx`. Proxy is protected-first: only `/sign-in`, `/sign-up` public via `isPublicRoute`, rest `auth.protect()`.
 - Orgs are Membership-required (forced selection, no personal accounts, invite-only joins). After moving routes, `rm -rf .next` before rebuild (stale type validators).
+- DB is Drizzle + Neon Postgres: schema + client live in `lib/db/` (`schema.ts`, `index.ts` via `neon-http`); `drizzle.config.ts` at root (`out: ./drizzle`). App runtime uses pooled `DATABASE_URL`; drizzle-kit migrations prefer direct `DATABASE_URL_UNPOOLED`. Never read `.env*` contents.
