@@ -1,6 +1,8 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Coins, MessageSquare, SquarePen } from "lucide-react"
 import { OrganizationSwitcher, Show, UserButton } from "@clerk/nextjs"
 
@@ -26,6 +28,7 @@ import {
   SidebarRail,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import type { GameListItem } from "@/lib/games/queries"
 
 function GamesEmpty() {
   return (
@@ -35,7 +38,29 @@ function GamesEmpty() {
   )
 }
 
-export function AppSidebar() {
+function GamesList({ games }: { games: GameListItem[] }) {
+  const pathname = usePathname()
+  if (games.length === 0) {
+    return <GamesEmpty />
+  }
+  return (
+    <SidebarMenu>
+      {games.map((game) => (
+        <SidebarMenuItem key={game.id}>
+          <SidebarMenuButton
+            render={<Link href={`/game/${game.id}`} />}
+            isActive={pathname === `/game/${game.id}`}
+            tooltip={game.title}
+          >
+            <span className="truncate">{game.title}</span>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      ))}
+    </SidebarMenu>
+  )
+}
+
+export function AppSidebar({ games }: { games: GameListItem[] }) {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
@@ -59,6 +84,7 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton
+                  render={<Link href="/" />}
                   tooltip="New game"
                   size="lg"
                   className="bg-sidebar-accent text-sidebar-accent-foreground group-data-[collapsible=icon]:justify-center"
@@ -89,7 +115,7 @@ export function AppSidebar() {
                     <PopoverHeader>
                       <PopoverTitle>Games</PopoverTitle>
                     </PopoverHeader>
-                    <GamesEmpty />
+                    <GamesList games={games} />
                   </PopoverContent>
                 </Popover>
               </SidebarMenuItem>
@@ -99,7 +125,7 @@ export function AppSidebar() {
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
           <SidebarGroupLabel>Recents</SidebarGroupLabel>
           <SidebarGroupContent>
-            <GamesEmpty />
+            <GamesList games={games} />
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

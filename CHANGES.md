@@ -17,3 +17,4 @@ Log of user-facing changes per iteration.
 - Set project memory in `AGENTS.md`: bun as package manager, commit-after-every-iteration, skills-first workflow, `CHANGES.md` + `specs/NN-*.md` conventions.
 - Renamed package `x` → `game-builder` in `package.json`.
 - Sidebar footer: org switcher and user avatar now share one `items-center` row (org `flex-1` left, `UserButton` right), "Account" label dropped, and the empty spacer div removed so the avatar sits on the org baseline with no extra gap below.
+- Games CRUD (org-scoped): `lib/games/actions.ts` (`createGame` server action, Clerk `orgId` scoping, raw prompt truncated to 80-char title) wired into `ChatComposer` (submit → `/game/[id]`); `lib/games/queries.ts` (`listGames` + org-checked `getGameById`) wired through async dashboard layout into sidebar Recents/collapsed Games popover; new `app/(dashboard)/game/[id]/page.tsx` detail with `notFound()` on miss or wrong org.
