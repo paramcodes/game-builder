@@ -2,11 +2,13 @@ import Image from "next/image"
 
 import {
   Empty,
+  EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty"
+import { ChatComposer } from "@/components/chat-composer"
 
 export default function DashboardPage() {
   return (
@@ -31,6 +33,9 @@ export default function DashboardPage() {
             your own words. If you can describe it, you can play it.
           </EmptyDescription>
         </EmptyHeader>
+        <EmptyContent className="w-full max-w-2xl">
+          <ChatComposer />
+        </EmptyContent>
       </Empty>
     </div>
   )
