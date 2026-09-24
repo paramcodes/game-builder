@@ -42,6 +42,7 @@ export function ChatComposer() {
         <InputGroupTextarea
           placeholder="Describe the game you want to build..."
           rows={2}
+          className="min-h-10"
         />
         <InputGroupAddon align="block-end" className="justify-between">
           <DropdownMenu>
